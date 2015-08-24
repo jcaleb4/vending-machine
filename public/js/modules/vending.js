@@ -169,8 +169,8 @@ vending.machine = (function ($) {
             success: function (response) {
                 console.log('Mongodb updated ' + response[0].name + ' quantity to ' + response[0].quantity);
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log('error', errorThrown);
+            error: function (errorThrown) {
+                console.log('error ' + errorThrown);
             }
         });
     }

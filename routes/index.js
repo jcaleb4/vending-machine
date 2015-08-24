@@ -13,6 +13,8 @@ module.exports = exports = function(app, db) {
         });
     });
 
+    // Gets the ajax request from the front end, searches the product selected and 
+    // decreases the value of the product by 1 and then send the new value to the page only for verification
     app.post('/getproduct', function(req, res){
         db.collection('products').update(req.body, {$inc : {quantity: -1}}, function(err, info){
             if (err) {
@@ -20,10 +22,14 @@ module.exports = exports = function(app, db) {
             } else {
                 db.collection('products').find(req.body).toArray(function(err, product) {
                     "use strict";
-                    // if error show error
-                    if (err) return callback(err, null);
 
-                    res.send('homepage', product);
+                    // if error show error
+                    if (err) {
+                        res.send(err);
+                        //return callback(err, null);
+                    }
+
+                    res.send(product);
                 });
             } 
         }); 
