@@ -1,4 +1,5 @@
 var vending = vending || {};
+
 /**
  * Initializes the vending machine module
  */
@@ -16,8 +17,10 @@ vending.machine = (function ($) {
      * Inits the vending module
      */
     function init() {
+
         // ready to select elements
         activateSelectors();
+
         // ready to receive money
         getMoney();
     }
@@ -25,6 +28,8 @@ vending.machine = (function ($) {
     // get money from user
     function getMoney(){
         $('.money-item').on('click', function(){
+
+            // If there is no change and the product have been purchased
             if (moneyChange === 0 && !pickUpProduct){
                 $('.vending-message').text('');
                 $('.product-selector').removeClass('selected');
@@ -33,6 +38,7 @@ vending.machine = (function ($) {
             }
         });
 
+        // Cancell button 
         $('.money-panel__cancel').on('click', function(){
             isCanceled = true;
             productSelected = null;
@@ -44,6 +50,7 @@ vending.machine = (function ($) {
         });
     }
 
+    // This will activate the product selectors
     function activateSelectors(){
         $('.product-selector').on('click', function(){
             productSelected = $(this).attr('data-selector');
@@ -54,12 +61,16 @@ vending.machine = (function ($) {
             $('.product-selector').removeClass('selected');
             $(this).addClass('selected');
 
+            // if there is no money added to the machine
             if (!moneyAdded){
                 $('.product-selector').removeClass('selected');
                 $('.vending-message').text('You need ' + '$' + productPrice + ' for that one :)');
 
                 resetSelectors();
+
+            // if there is money in the machine
             } else {
+
                 // if the quantity of product is 0
                 if(productLeft < 1){
                     $('.vending-message').text('Sorry that guy took the last one :(');
@@ -67,6 +78,8 @@ vending.machine = (function ($) {
                     productSelected = null;
                     resetSelectors();
                     $('.change-box').text((moneyAdded).toFixed(2));
+
+                // if there is product left
                 } else {
                     processProduct();
                 }
@@ -75,21 +88,30 @@ vending.machine = (function ($) {
         });
     }
 
+    // Will process they money and change in order to get the product
     function processProduct(){
+
         // if the money is the needed or more
         if(moneyAdded && moneyAdded >= productPrice){
+
+            // if the money is more than needed
             if(moneyAdded > productPrice){
                 moneyChange = (moneyAdded - productPrice).toFixed(2);
                 $('.change-box').text(moneyChange);
 
-                if(productLeft > 0){
+                // if the product quantity is more or equal to 1
+                if(productLeft >= 1){
                     $('.change-panel').addClass('active');
                     $('.change-box').on('click', function(){
+
+                        // if there is product left and product selected
                         if(productLeft && productSelected){
                             $('.vending-message').text('Thank you! Enjoy!');
                             processPayment();
                             updateDatabase();
                             resetBasicElements();
+
+                        // if there is no product left or product not selected
                         } else {
                             $('.vending-message').text('');
                             resetSelectors();
@@ -98,16 +120,20 @@ vending.machine = (function ($) {
                     });
 
                     $('.vending-message').text('Take your change to complete the transaction');
+
+                // if product is less than 1
                 } else {
                     $('.vending-message').text('Please select other product or cancel :)');
                 }
 
-            // if there is not enough money for the selected product
+            // if the money is exaclty the needed for the product
             } else if (moneyAdded == productPrice){
                 $('.vending-message').text('Thank you! Enjoy!');
                 processPayment();
                 updateDatabase();
             }
+
+        // if there is not enough money for the selected product
         } else {
             $('.product-selector').removeClass('selected');
             $('.vending-message').text('You need ' + '$' + productPrice + ' for that one :)');
@@ -126,11 +152,15 @@ vending.machine = (function ($) {
         resetMoney();
         resetSelectors();
         pickUpProduct = true;
+
+        // product door button
         $('.product-door').addClass('active').on('click', function(){
             completeProcess();
         });
     }
 
+    // will update the database asking for the name of the product and substracting one (this will happen in the database)
+    // Not handling error // assuming this will always work
     function updateDatabase(){
         $.ajax({
             type: 'POST',
@@ -169,6 +199,7 @@ vending.machine = (function ($) {
         resetBasicElements();
     }
 
+    // Reset variables to original values
     function resetBasicElements(){
         productSelected = null;
         productPrice = null;
@@ -179,6 +210,7 @@ vending.machine = (function ($) {
         moneyAdded = 0;
     }
 
+    // exposing init function
     return {
         init: init
     };
