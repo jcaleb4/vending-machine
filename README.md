@@ -68,7 +68,9 @@ Make sure you have already installed nodejs and mongodb and that they’re worki
 
 1- I know there may be some bugs (or many) but I actually could only work on this for a very short amount of time
 
-2- There where no instructions at all... for real... not even one... so this could be very different of what you expected :)
+2- I didn't had time enough to add appropiate documentation I appology for that
+
+3- There where no instructions at all... for real... not even one... so this could be very different of what you expected :)
 
 
 
