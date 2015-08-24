@@ -160,15 +160,18 @@ vending.machine = (function ($) {
     }
 
     // will update the database asking for the name of the product and substracting one (this will happen in the database)
-    // Not handling error // assuming this will always work
     function updateDatabase(){
         $.ajax({
             type: 'POST',
             data: {name: productSelected},
             url: '/getproduct',
-            dataType: 'JSON'
-        }).done(function( response ) {
-            console.log('Mongodb updated ' + response[0].name + ' quantity to ' + response[0].quantity);
+            dataType: 'JSON',
+            success: function (response) {
+                console.log('Mongodb updated ' + response[0].name + ' quantity to ' + response[0].quantity);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log('error', errorThrown);
+            }
         });
     }
 
