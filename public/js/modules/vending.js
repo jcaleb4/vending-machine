@@ -131,6 +131,7 @@ vending.machine = (function ($) {
                 $('.vending-message').text('Thank you! Enjoy!');
                 processPayment();
                 updateDatabase();
+                resetBasicElements();
             }
 
         // if there is not enough money for the selected product
