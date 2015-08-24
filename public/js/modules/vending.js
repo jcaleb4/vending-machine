@@ -88,9 +88,17 @@ vending.machine = (function ($) {
                 }
             // if the money added is the needed for the new product
             } else if (moneyAdded && moneyAdded == productPrice){
-                processPayment();
-                updateDatabase();
-                resetBasicElements();
+                if(productLeft > 0){
+                    processPayment();
+                    updateDatabase();
+                    resetBasicElements();
+                } else {
+                    $('.vending-message').text('Sorry that guy took the last one :(');
+                    $('.product-selector').removeClass('selected');
+                    productSelected = null;
+                    resetSelectors();
+                    $('.change-box').text((moneyAdded).toFixed(2));
+                }
             }
         });
     }
