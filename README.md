@@ -26,6 +26,8 @@ Make sure you have already installed nodejs and mongodb and that they’re worki
 
 7-	Type “node app.js” and if you didn’t had any problems you should be able to go to http://localhost:4000/ and play with it
 
+Note: If you need to reset values of the database you can go to the mongo shell in the terminal, then type "use vending", then type "db.dropDatabase();" and then do the step 5 again. That will remove and generate a new database with the original values.
+
 
 
 # Vending machine assumptions
