@@ -31,12 +31,11 @@ vending.machine = (function ($) {
 
             // If there is no change and the product have been purchased
             if (moneyChange === 0 && !pickUpProduct){
-                //moneyAdded += (parseInt($(this).attr('data-value'))/100);
                 takeMoney($(this));
                 resetSelectors();
+            // If there is change to release but no product to release
             } else if (moneyChange > 0 && !pickUpProduct){
                 $('.change-box').text('');
-                //moneyAdded += (parseInt($(this).attr('data-value'))/100);
                 takeMoney($(this));
                 resetSelectors();
             }
@@ -57,11 +56,7 @@ vending.machine = (function ($) {
     // This will activate the product selectors
     function activateSelectors(){
         $('.product-selector').on('click', function(){
-
             productSelected = $(this).attr('data-selector');
-
-            console.log(productSelected);
-
             productPrice = $('[id="' + productSelected + '"]').attr('data-price');
             productLeft = $('[id="' + productSelected + '"]').attr('data-quantity');
             productImage = $('[id="' + productSelected + '"] .product-image').attr('src');
@@ -91,12 +86,12 @@ vending.machine = (function ($) {
                 } else {
                     processProduct();
                 }
+            // if the money added is the needed for the new product
             } else if (moneyAdded && moneyAdded == productPrice){
                 processPayment();
                 updateDatabase();
                 resetBasicElements();
             }
-            
         });
     }
 
@@ -197,6 +192,7 @@ vending.machine = (function ($) {
         $('.money-added').text('add some money');
     }
 
+    // get and process the money
     function takeMoney($money){
         moneyAdded += (parseInt($money.attr('data-value'))/100);
         $('.vending-message').text('');
