@@ -26,7 +26,7 @@ module.exports = exports = function(app, db) {
                     // if error show error
                     if (err) {
                         res.send(err);
-                        //return callback(err, null);
+                        return callback(err, null);
                     }
 
                     res.send(product);
