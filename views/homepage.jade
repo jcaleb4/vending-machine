@@ -1,0 +1,60 @@
+doctype html
+html
+    head
+        block head
+            meta(charset='utf-8')
+            meta(http-equiv='content-type', content='text/html;charset=utf-8')
+            meta(name='viewport', content='width=device-width,minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0')
+            link(href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900', rel='stylesheet', type='text/css')
+            link(href='css/_style.css', rel='stylesheet', type='text/css')
+
+    body
+        div.main-container
+            div.vending-machine
+                p.vending-message
+                ul.products-list
+                    for product in myProducts
+                        li.products-list__item(id="#{product['name']}", data-price="#{product['price']}", data-quantity="#{product['quantity']}")
+                            span.products-list__name #{product['name']}
+                            span.products-list__price $#{product['price']}
+                            span.products-list__quantity #{product['quantity']} left
+                            img.product-image(src="#{product['image']}")
+
+                div.money-panel
+                    p.money-added add some money
+                    div.money-panel__cancel CANCEL
+                    div.money-panel__bill
+                    div.money-panel__coin
+
+
+                ul.products-panel
+                    for product in myProducts
+                        li.product-selector(data-selector="#{product['name']}"): span #{product['name']}
+
+                div.change-panel
+                    p Take your change
+                    span.change-box
+
+                div.vending-window
+                    p.product-door
+                        span.door-text
+                        span.product
+                            img(src="")
+
+            div.money-container
+                p Select the ammout you'll like to add
+                ul.money-selector
+                    li.money-item.money-container__coin(data-value="10") &cent;10
+                    li.money-item.money-container__coin(data-value="25") &cent;25
+                    li.money-item.money-container__coin(data-value="50") &cent;50
+                    li.money-item.money-container__bill(data-value="100") $1
+                    li.money-item.money-container__bill(data-value="500") $5
+                    li.money-item.money-container__bill(data-value="1000") $10
+
+    script(src="js/thirdparty/jquery-2.1.4.min.js")
+    script(src="js/modules/vending.js")
+    script(src="js/init.js")
+
+
+
+

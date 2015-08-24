@@ -1,0 +1,291 @@
+/* GLOBAL ATTRIBUTES */
+
+body 
+	font-family sans-serif
+
+/* MAIN CONTAINER */
+.main-container
+	overflow hidden
+	width 750px
+	margin 20px auto
+
+/* VENDING MACHINE */
+.vending-machine
+	width 600px
+	float left
+	overflow hidden
+	background-color crimson
+	padding 10px
+
+.vending-message
+	line-height 50px
+	height 50px
+	text-align center
+	background-color darkgray
+	color #000
+	text-transform uppercase
+	margin-bottom 10px
+
+/* PRODUCTS IN WINDOW */
+.products-list
+	width 400px
+	float left
+	overflow hidden
+	border-radius 10px
+	background-color #def
+
+.products-list__item
+	float left
+	box-sizing border-box
+	width 33.33%
+	height 150px
+	border 4px solid darkkhaki
+	position relative
+	background-color #def
+
+.products-list__price,
+.products-list__name,
+.products-list__quantity
+	display block
+	position absolute
+	text-align center
+	background-color antiquewhite
+
+
+/* PRODUCTS NAME */
+.products-list__name
+	width 100%
+	font-weight bold
+	top 0
+	left 0
+	text-align center
+	text-transform uppercase
+	background-color #268596
+	color white
+	line-height 15px
+	padding 5px 0
+
+.products-list__price,
+.products-list__quantity
+	width 50%
+	bottom 0
+	line-height 20px
+
+/* PRODUCT PRICE */
+.products-list__price
+	left 0	
+
+/* PRODUCT QUANTITY */
+.products-list__quantity
+	right 0
+	background-color #3CB1D4
+
+/* MONEY panel */
+.money-panel
+	float left
+	max-width 190px
+	margin-left 10px
+	overflow hidden
+	background-color dimgrey
+	box-sizing border-box
+	padding 10px
+	margin-bottom 10px
+
+.money-added
+	margin-bottom 10px
+	line-height 30px
+	text-align center
+	color #000
+	background-color aqua
+	clear both
+	text-transform uppercase
+
+.money-panel__cancel
+	width 45px
+	margin-right 10px
+	font-size 10px
+	text-align center
+	line-height 30px
+	background-color darkgoldenrod
+	float left
+	color white
+	cursor pointer
+
+.money-panel__bill
+	width 75px
+	height 30px
+	background-color darkslategray
+	float left
+	position relative
+
+.money-panel__bill:before
+	content ""
+	display block
+	width 80%
+	margin 16% 0 0 10%
+	height 6px
+	background-color black
+
+.money-panel__coin
+	width 30px
+	height 30px
+	border-radius 50%
+	background-color darkslategray
+	float left
+	position relative
+	margin-left 10px
+
+.money-panel__coin:before
+	content ""
+	display block
+	width 6px
+	margin 10% 0 0 40%
+	height 80%
+	background-color black
+
+/* PRODUCTS panel */
+.products-panel
+	position relative
+	float left
+	max-width 190px
+	margin-left 10px
+	overflow hidden
+	background-color dimgrey
+
+	&.disable:after
+		content ""
+		display block
+		width 100%
+		height 100%
+		position absolute
+		top 0
+		left 0
+
+.product-selector
+	float left
+	margin 10px
+	width 43px
+	line-height 10px
+	font-size 9px
+	height 43px
+	border-radius 50%
+	background-color darkgoldenrod
+	cursor pointer
+
+	&.selected,
+	&:hover
+		background-color brown
+
+.product-selector span 
+	display table-cell
+	vertical-align middle
+	text-align center
+	color white
+	height 43px
+	width 43px
+
+/* CHANGE panel */
+.change-panel
+	margin-top 10px
+	width 150px
+	margin-left 10px
+	text-transform uppercase
+	background-color darkgray
+	float left
+	padding 10px 20px 20px
+	text-align center
+	color #666
+
+	&.active
+		animation focus 1s infinite
+
+@keyframes focus 
+	0%  
+		background-color darkgray
+	50% 
+		background-color #CC7025 
+		color white
+	100%   
+		background-color darkgray
+
+.change-box
+	line-height 30px
+	display block
+	margin-top 10px
+	height 30px
+	color white
+	background-color #666
+	cursor pointer
+
+/* PRODUCT DOOR */
+.vending-window
+	clear both
+	overflow hidden
+
+.product-door
+	width 400px
+	background-color #333
+	color #999
+	text-align center
+	text-transform uppercase
+	line-height 31px
+	height 80px
+	margin-top 10px
+	cursor pointer
+	position relative
+
+.product-door .product
+	position absolute
+	width 100px
+	height 150px
+	top 0px
+	left 50%
+	margin-left -50px
+	display none
+
+.product-door .product.active
+	display block
+	animation getdown 0.5s
+
+@keyframes getdown 
+	0%
+		top -100px
+	100%   
+		top 0
+
+.product-door .product img
+	width 100%
+	height auto
+
+.product-door.active .door-text
+	animation opendoor 1s infinite
+
+@keyframes opendoor 
+	0%
+		opacity 1
+	50% 
+		opacity 0.3
+	100%   
+		opacity 1
+
+/* MONEY CONTAINER */
+.money-container
+	float left
+	width 130px
+	text-align center
+
+.money-container__coin
+	line-height 30px
+	width 30px
+	margin 5px auto
+	border-radius 50%
+	background-color #ccc
+	cursor pointer
+
+.money-container__bill
+	line-height 30px
+	width 60px
+	margin 5px auto
+	background-color green
+	cursor pointer
+	color white
